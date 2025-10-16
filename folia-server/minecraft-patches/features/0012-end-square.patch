@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: xKumorio <78680226+xKumorio@users.noreply.github.com>
+Date: Sat, 2 Aug 2025 03:15:47 +0500
+Subject: [PATCH] end-square
+
+
+diff --git a/net/minecraft/world/level/levelgen/DensityFunctions.java b/net/minecraft/world/level/levelgen/DensityFunctions.java
+index 04527a5c65ad630f794fed9071d485aedd02257a..ca852599e7e2c56ec933e7fee7774685c49b1855 100644
+--- a/net/minecraft/world/level/levelgen/DensityFunctions.java
++++ b/net/minecraft/world/level/levelgen/DensityFunctions.java
+@@ -528,7 +528,7 @@ public final class DensityFunctions {
+             int i1 = z / 2;
+             int i2 = x % 2;
+             int i3 = z % 2;
+-            float f = 100.0F - Mth.sqrt((long)x * (long)x + (long)z * (long)z) * 8.0F; // Paper - cast ints to long to avoid integer overflow
++            float f = 100.0F - Mth.sqrt((float)(x * x + z * z)) * 8.0F; // Paper - cast ints to long to avoid integer overflow
+             f = Mth.clamp(f, -100.0F, 80.0F);
+ 
+             NoiseCache cache = noiseCache.get().computeIfAbsent(noise, noiseKey -> new NoiseCache()); // Paper - Perf: Optimize end generation

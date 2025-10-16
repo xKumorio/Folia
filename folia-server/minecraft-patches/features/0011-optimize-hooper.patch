@@ -1,0 +1,28 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: xKumorio <78680226+xKumorio@users.noreply.github.com>
+Date: Sat, 2 Aug 2025 03:14:42 +0500
+Subject: [PATCH] optimize-hooper
+
+
+diff --git a/net/minecraft/world/item/ItemStack.java b/net/minecraft/world/item/ItemStack.java
+index 6154da1158756cff072d7e8cae10e20eafed1eec..a727608d78826cb9654b0fa7003c384a25b4e4c2 100644
+--- a/net/minecraft/world/item/ItemStack.java
++++ b/net/minecraft/world/item/ItemStack.java
+@@ -578,8 +578,16 @@ public final class ItemStack implements DataComponentHolder {
+         return itemStack;
+     }
+ 
++    Item sameItem = null; // Abomination
+     public int getMaxStackSize() {
+-        return this.getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
++        // Abomination start
++        if (sameItem != null && sameItem == this.item) return 1;
++        int ret = this.getOrDefault(DataComponents.MAX_STACK_SIZE, -1);
++        if (ret == -1) return 1;
++        if (ret == 1 && this.item != null) sameItem = this.item;
++        return ret;
++        // Abomination end
++
+     }
+ 
+     public boolean isStackable() {
