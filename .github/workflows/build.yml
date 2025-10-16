@@ -32,8 +32,8 @@ jobs:
       - name: Apply Patches
         run: ./gradlew applyAllPatches --stacktrace
 
-      - name: Build
-        run: ./gradlew build --stacktrace
+      - name: Build Mojmap Bundler Jar
+        run: ./gradlew createMojmapBundlerJar
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
